@@ -1,0 +1,3474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edunology - Future Begins Here</title>
+    <link rel="icon" type="image/png" href="image.png" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- Chart.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            margin: 0;
+            background-color: #f0f2f5;
+        }
+        
+        /* Color Variables - New Green Color Theme */
+        :root {
+            --primary-green: #08CB00; /* Bright green color */
+            --dark-green: #253900; /* Dark green color */
+            --black: #000000; /* Black color */
+            --light-gray: #EEEEEE; /* Light gray/white color */
+            --text-light: var(--light-gray);
+            --text-dark: var(--black);
+            --bg-light: var(--light-gray);
+            --bg-card: var(--light-gray);
+            --gradient-primary: linear-gradient(135deg, var(--dark-green), var(--primary-green)); /* Dark green to bright green gradient */
+            --gradient-accent: linear-gradient(135deg, var(--primary-green), var(--dark-green)); /* Bright green to dark green gradient */
+            --gradient-modern: linear-gradient(135deg, var(--dark-green), var(--primary-green)); /* Dark green to bright green gradient */
+            --gradient-bright: linear-gradient(135deg, var(--dark-green), var(--primary-green)); /* Dark green to bright green gradient */
+        }
+        
+        /* Navigation bar with new color theme */
+        .nav-bg {
+            background: var(--gradient-modern); /* Dark green to bright green gradient */
+            backdrop-filter: blur(10px);
+            color: var(--text-light);
+            z-index: 1000;
+            opacity: 0.9; /* Increased transparency */
+            box-shadow: 0 8px 32px rgba(37, 57, 0, 0.5);
+            border-bottom: 1px solid rgba(238, 238, 238, 0.1);
+        }
+        
+        /* Footer with new color theme */
+        .footer-bg {
+            background: var(--gradient-modern); /* Dark green to bright green gradient */
+            color: var(--text-light);
+            opacity: 0.95;
+        }
+        
+        /* Navigation text styling - ENHANCED WITH COLOR CHANGE */
+        .nav-bg a {
+            color: var(--text-light);
+            transition: all 0.3s ease;
+            position: relative;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            margin: 0 0.75rem; /* Added spacing between links */
+        }
+        
+        /* Add vertical line between nav links */
+        .nav-bg a:not(:last-child):after {
+            content: '';
+            position: absolute;
+            right: -0.75rem; /* Position the vertical line */
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 70%; /* Height of the vertical line */
+            background-color: var(--light-gray);
+            opacity: 0.5;
+        }
+        
+        .nav-bg a:not(.nav-hover):before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-green);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-bg a:hover:not(.nav-hover) {
+            color: var(--primary-green); /* Changed color on hover */
+        }
+        
+        .nav-bg a:hover:not(.nav-hover):before {
+            width: 100%;
+        }
+        
+        /* Footer text styling */
+        .footer-bg a {
+            color: var(--text-light);
+            transition: all 0.3s ease;
+        }
+        
+        .footer-bg a:hover {
+            color: var(--light-gray);
+        }
+        
+        /* Enhanced Enquire Now Button */
+        .enquire-now-btn {
+            background: var(--gradient-bright); /* Dark green to bright green gradient */
+            color: var(--text-light); /* Light text for contrast */
+            border-radius: 50px; /* More rounded corners */
+            padding: 0.75rem 1.5rem;
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(8, 203, 0, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .enquire-now-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s;
+        }
+        
+        .enquire-now-btn:hover::before {
+            left: 100%;
+        }
+        
+        .enquire-now-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(8, 203, 0, 0.6);
+            background: var(--gradient-bright); /* Same gradient on hover */
+            color: var(--text-light); /* Light text on hover */
+        }
+        
+        .enquire-now-btn i {
+            font-size: 1.2rem;
+            margin-right: 0.5rem;
+        }
+        
+        /* Enhanced pulsing animation */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(8, 203, 0, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(8, 203, 0, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(8, 203, 0, 0);
+            }
+        }
+        
+        .enquire-now-btn {
+            animation: pulse 2s infinite;
+        }
+        
+        /* Enhanced Flip Card Styling */
+        .flip-card {
+            background-color: transparent;
+            width: 100%;
+            height: 400px;
+            perspective: 1000px;
+            margin-bottom: 2rem;
+        }
+        
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+        
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem;
+        }
+        
+        .flip-card-front {
+            background: var(--bg-card);
+            color: var(--text-dark);
+        }
+        
+        .flip-card-back {
+            background: var(--gradient-bright); /* Dark green to bright green gradient */
+            color: #ffffff !important; /* White text for contrast */
+            transform: rotateY(180deg);
+        }
+        
+        .flip-card-back h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            color: #ffffff !important; /* White text */
+        }
+        
+        .flip-card-back p {
+            margin-bottom: 1.5rem;
+            color: #ffffff !important; /* White text */
+            text-align: justify; /* Justified text */
+        }
+        
+        .flip-card-back .btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--text-light);
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .flip-card-back .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+        
+        /* Styling for cards */
+        .course-card, .trainer-card, .testimonial-card, .service-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 1rem;
+            background: var(--bg-card);
+            color: var(--text-dark);
+            width: 100%;
+            max-width: 350px;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+            margin: 0 auto;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        /* Card clipart background */
+        .course-card::before, .service-card::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 120px;
+            height: 120px;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">📚</text></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.1;
+            transform: rotate(15deg);
+        }
+        
+        /* Hover effect for cards */
+        .course-card:hover, .service-card:hover, .trainer-card:hover, .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            border-color: var(--primary-green);
+        }
+        
+        /* Text color for card content */
+        .course-card p, .service-card p, .testimonial-card p {
+            color: var(--black);
+            font-weight: 500;
+            text-align: justify; /* Justified text */
+        }
+        
+        /* Heading color for cards */
+        .course-card h3, .service-card h3, .testimonial-card h4 {
+            color: var(--dark-green);
+        }
+        
+        /* Subtext in testimonials */
+        .testimonial-card .text-sm {
+            color: var(--dark-green);
+        }
+        
+        /* About section heading */
+        .about-heading {
+            background: var(--gradient-primary);
+            color: var(--text-light);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(37, 57, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .about-heading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        /* Enhanced section headings */
+        .section-heading {
+            background: var(--gradient-bright); /* Dark green to bright green gradient */
+            color: var(--text-light); /* Light text for contrast */
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            display: inline-block;
+            font-size: 2.25rem;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(37, 57, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-heading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shine 3s infinite;
+        }
+        
+        .section-heading:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 12px 30px rgba(37, 57, 0, 0.5);
+        }
+        
+        .contact-heading {
+            display: block;
+            text-align: center;
+        }
+        
+        /* Enhanced section icons with clipart */
+        .course-icon, .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            transition: transform 0.3s ease, filter 0.3s ease;
+            position: relative;
+        }
+        
+        /* Icon hover effect */
+        .course-icon:hover, .service-icon:hover {
+            transform: scale(1.2) rotate(5deg);
+        }
+        
+        /* Individual icon colors with new theme */
+        .icon-graduation-cap {
+            color: var(--dark-green);
+            text-shadow: 0 0 15px rgba(37, 57, 0, 0.5);
+            filter: drop-shadow(0 0 8px rgba(37, 57, 0, 0.3));
+        }
+        
+        .icon-globe {
+            color: var(--primary-green);
+            text-shadow: 0 0 15px rgba(8, 203, 0, 0.5);
+            filter: drop-shadow(0 0 8px rgba(8, 203, 0, 0.3));
+        }
+        
+        .icon-code {
+            color: var(--primary-green);
+            text-shadow: 0 0 15px rgba(8, 203, 0, 0.5);
+            filter: drop-shadow(0 0 8px rgba(8, 203, 0, 0.3));
+        }
+        
+        .icon-table {
+            color: var(--dark-green);
+            text-shadow: 0 0 15px rgba(37, 57, 0, 0.5);
+            filter: drop-shadow(0 0 8px rgba(37, 57, 0, 0.3));
+        }
+        
+        .icon-bullhorn {
+            color: var(--primary-green);
+            text-shadow: 0 0 15px rgba(8, 203, 0, 0.5);
+            filter: drop-shadow(0 0 8px rgba(8, 203, 0, 0.3));
+        }
+        
+        .icon-chart-bar {
+            color: var(--primary-green);
+            text-shadow: 0 0 15px rgba(8, 203, 0, 0.5);
+            filter: drop-shadow(0 0 8px rgba(8, 203, 0, 0.3));
+        }
+        
+        .icon-paint-brush {
+            color: var(--dark-green);
+            text-shadow: 0 0 15px rgba(37, 57, 0, 0.5);
+            filter: drop-shadow(0 0 8px rgba(37, 57, 0, 0.3));
+        }
+        
+        .icon-calculator {
+            color: var(--primary-green);
+            text-shadow: 0 0 15px rgba(8, 203, 0, 0.5);
+            filter: drop-shadow(0 0 8px rgba(8, 203, 0, 0.3));
+        }
+        
+        .icon-chart-line {
+            color: var(--primary-green);
+            text-shadow: 0 0 15px rgba(8, 203, 0, 0.5);
+            filter: drop-shadow(0 0 8px rgba(8, 203, 0, 0.3));
+        }
+        
+        .icon-cogs {
+            color: var(--dark-green);
+            text-shadow: 0 0 15px rgba(37, 57, 0, 0.5);
+            filter: drop-shadow(0 0 8px rgba(37, 57, 0, 0.3));
+        }
+        
+        .icon-file-invoice-dollar {
+            color: var(--dark-green);
+            text-shadow: 0 0 15px rgba(37, 57, 0, 0.5);
+            filter: drop-shadow(0 0 8px rgba(37, 57, 0, 0.3));
+        }
+        
+        .icon-wordpress {
+            color: var(--primary-green);
+            text-shadow: 0 0 15px rgba(8, 203, 0, 0.5);
+            filter: drop-shadow(0 0 8px rgba(8, 203, 0, 0.3));
+        }
+        
+        .icon-desktop {
+            color: var(--primary-green);
+            text-shadow: 0 0 15px rgba(8, 203, 0, 0.5);
+            filter: drop-shadow(0 0 8px rgba(8, 203, 0, 0.3));
+        }
+        
+        .icon-search-dollar {
+            color: var(--dark-green);
+            text-shadow: 0 0 15px rgba(37, 57, 0, 0.5);
+            filter: drop-shadow(0 0 8px rgba(37, 57, 0, 0.3));
+        }
+        
+        .icon-paint-roller {
+            color: var(--dark-green);
+            text-shadow: 0 0 15px rgba(37, 57, 0, 0.5);
+            filter: drop-shadow(0 0 8px rgba(37, 57, 0, 0.3));
+        }
+        
+        .icon-search {
+            color: var(--primary-green);
+            text-shadow: 0 0 15px rgba(8, 203, 0, 0.5);
+            filter: drop-shadow(0 0 8px rgba(8, 203, 0, 0.3));
+        }
+        
+        .icon-mobile-alt {
+            color: var(--primary-green);
+            text-shadow: 0 0 15px rgba(8, 203, 0, 0.5);
+            filter: drop-shadow(0 0 8px rgba(8, 203, 0, 0.3));
+        }
+        
+        .icon-users {
+            color: var(--dark-green);
+            text-shadow: 0 0 15px rgba(37, 57, 0, 0.5);
+            filter: drop-shadow(0 0 8px rgba(37, 57, 0, 0.3));
+        }
+        
+        .icon-award {
+            color: var(--dark-green);
+            text-shadow: 0 0 15px rgba(37, 57, 0, 0.5);
+            filter: drop-shadow(0 0 8px rgba(37, 57, 0, 0.3));
+        }
+        
+        .icon-laptop-code {
+            color: var(--primary-green);
+            text-shadow: 0 0 15px rgba(8, 203, 0, 0.5);
+            filter: drop-shadow(0 0 8px rgba(8, 203, 0, 0.3));
+        }
+        
+        .icon-handshake {
+            color: var(--primary-green);
+            text-shadow: 0 0 15px rgba(8, 203, 0, 0.5);
+            filter: drop-shadow(0 0 8px rgba(8, 203, 0, 0.3));
+        }
+        
+        .icon-briefcase {
+            color: var(--dark-green);
+            text-shadow: 0 0 15px rgba(37, 57, 0, 0.5);
+            filter: drop-shadow(0 0 8px rgba(37, 57, 0, 0.3));
+        }
+        
+        .icon-user-tie {
+            color: var(--dark-green);
+            text-shadow: 0 0 15px rgba(37, 57, 0, 0.5);
+            filter: drop-shadow(0 0 8px rgba(37, 57, 0, 0.3));
+        }
+        
+        .icon-tools {
+            color: var(--primary-green);
+            text-shadow: 0 0 15px rgba(8, 203, 0, 0.5);
+            filter: drop-shadow(0 0 8px rgba(8, 203, 0, 0.3));
+        }
+        
+        .icon-map-marker-alt {
+            color: var(--primary-green);
+            text-shadow: 0 0 15px rgba(8, 203, 0, 0.5);
+            filter: drop-shadow(0 0 8px rgba(8, 203, 0, 0.3));
+        }
+        
+        .icon-phone-alt {
+            color: var(--dark-green);
+            text-shadow: 0 0 15px rgba(37, 57, 0, 0.5);
+            filter: drop-shadow(0 0 8px rgba(37, 57, 0, 0.3));
+        }
+        
+        .icon-envelope {
+            color: var(--dark-green);
+            text-shadow: 0 0 15px rgba(37, 57, 0, 0.5);
+            filter: drop-shadow(0 0 8px rgba(37, 57, 0, 0.3));
+        }
+        
+        .icon-chalkboard-teacher {
+            color: var(--primary-green);
+            text-shadow: 0 0 15px rgba(8, 203, 0, 0.5);
+            filter: drop-shadow(0 0 8px rgba(8, 203, 0, 0.3));
+        }
+        
+        /* Enhanced WhatsApp button styling */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: var(--gradient-accent);
+            color: var(--text-light);
+            padding: 18px;
+            border-radius: 50%;
+            box-shadow: 0 8px 25px rgba(8, 203, 0, 0.5);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .whatsapp-btn:hover {
+            transform: scale(1.2) rotate(15deg);
+            box-shadow: 0 12px 30px rgba(8, 203, 0, 0.7);
+        }
+        
+        /* Enhanced scroll animation for sections */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+        
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Enhanced slider overlay styling - MODIFIED FOR RIGHT SIDE */
+        .banner-overlay {
+            background: rgba(0, 0, 0, 0.5); /* Increased transparency */
+            backdrop-filter: blur(2px); /* Reduced blur effect */
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 500px;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1.5rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* Reduced shadow */
+            border-right: 3px solid var(--primary-green); /* Changed to right border with new color */
+            position: absolute;
+            top: 25%; /* Moved up from 40% to 25% */
+            right: 10px; /* Changed to right side */
+            left: auto; /* Override any left positioning */
+            z-index: 2;
+            min-height: 300px; /* Added minimum height */
+        }
+        
+        .swiper-slide-active .banner-overlay {
+            animation: slideIn 0.8s ease-out forwards;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 0.9;
+                transform: translateY(0);
+            }
+        }
+        
+        .banner-overlay h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-light);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Reduced text shadow */
+            position: relative;
+            z-index: 1;
+            margin-bottom: 0.5rem; /* Added margin */
+        }
+        
+        .banner-overlay p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Reduced text shadow */
+            position: relative;
+            z-index: 1;
+            margin-bottom: 0.5rem; /* Added margin */
+        }
+        
+        .banner-overlay .tagline {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            margin-bottom: 1rem; /* Added margin */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+        }
+        
+        /* Enhanced slider button styling */
+        .banner-btn {
+            background: var(--gradient-accent);
+            color: var(--text-light);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 6px 15px rgba(8, 203, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            margin-top: 0.5rem; /* Added margin */
+        }
+        
+        .banner-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s;
+        }
+        
+        .banner-btn:hover::before {
+            left: 100%;
+        }
+        
+        .banner-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 25px rgba(8, 203, 0, 0.6);
+        }
+        
+        /* Enhanced slider navigation buttons */
+        .swiper-button-prev, .swiper-button-next {
+            background: var(--gradient-primary);
+            color: var(--text-light);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            box-shadow: 0 8px 25px rgba(37, 57, 0, 0.6);
+            transition: all 0.3s ease;
+            z-index: 3;
+        }
+        
+        .swiper-button-prev::after, .swiper-button-next::after {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .swiper-button-prev:hover, .swiper-button-next:hover {
+            transform: scale(1.2) rotate(5deg);
+            box-shadow: 0 12px 30px rgba(37, 57, 0, 0.8);
+        }
+        
+        .swiper-button-prev {
+            left: 20px;
+        }
+        
+        .swiper-button-next {
+            right: 20px;
+        }
+        
+        /* Enhanced slider container */
+        .swiper {
+            width: 100%;
+            height: 100vh; /* Full viewport height */
+            position: relative;
+        }
+        
+        .swiper-slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .swiper-slide-active {
+            opacity: 1;
+        }
+        
+        .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures image covers entire slide */
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        
+        /* Enhanced slider pagination */
+        .swiper-pagination-bullet {
+            background: var(--text-light);
+            opacity: 0.7;
+            width: 12px;
+            height: 12px;
+            transition: all 0.3s ease;
+            z-index: 3;
+        }
+        
+        .swiper-pagination-bullet-active {
+            background: var(--primary-green);
+            opacity: 1;
+            width: 30px;
+            border-radius: 6px;
+        }
+        
+        /* Enhanced mobile menu styling */
+        #mobile-menu {
+            transition: transform 0.3s ease-in-out;
+            transform: translateY(-100%);
+            background: var(--gradient-modern);
+            color: var(--text-light);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        #mobile-menu.active {
+            transform: translateY(0);
+        }
+        
+        /* Enhanced sections with light background */
+        .section-white-bg {
+            background: linear-gradient(135deg, var(--light-gray), var(--light-gray)); /* Light gray to light gray gradient */
+            color: var(--text-dark);
+            position: relative;
+        }
+        
+        .section-white-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" stroke="rgba(37,57,0,0.1)" stroke-width="1"/></svg>');
+            background-size: 20px 20px;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+        
+        /* Enhanced Achievements and Trainer section with gradient background */
+        .section-gradient-bg {
+            background: var(--gradient-modern);
+            color: var(--text-light);
+            position: relative;
+        }
+        
+        .section-gradient-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" stroke="rgba(238,238,238,0.1)" stroke-width="1"/></svg>');
+            background-size: 20px 20px;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+        
+        /* Ensures the text within light sections is a dark color */
+        .section-white-bg h2, 
+        .section-white-bg h3,
+        .section-white-bg p,
+        .section-white-bg a {
+            color: var(--text-dark) !important;
+        }
+        
+        .section-white-bg .course-heading, .section-white-bg .service-heading {
+            background: var(--gradient-accent);
+            color: var(--text-light) !important;
+        }
+        
+        .placement-logo:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Enhanced placement logos styling */
+        .placement-logo {
+            max-width: 120px;
+            max-height: 60px;
+            height: auto;
+            transition: all 0.3s ease;
+            filter: grayscale(80%);
+            opacity: 0.7;
+            padding: 0.5rem;
+        }
+        
+        .placement-logo:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: scale(1.15);
+        }
+        
+        /* Enhanced placement grid styling */
+        .placement-grid {
+            background: linear-gradient(135deg, rgba(238,238,238,0.9), rgba(238,238,238,0.9)); /* Light gray to light gray */
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 3rem;
+            justify-items: center;
+            align-items: center;
+            max-width: 600px;
+            margin: 0 auto;
+            border-radius: 1rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+        }
+        
+        @media (min-width: 768px) {
+            .placement-grid {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+                gap: 2.5rem;
+                justify-content: space-around;
+            }
+        }
+        
+        /* Enhanced responsive adjustments for mobile */
+        @media (max-width: 768px) {
+            .banner-overlay {
+                max-width: 90%;
+                padding: 1.5rem;
+                top: 20% !important; /* Adjusted for mobile */
+                right: 5% !important; /* Changed to right side */
+                left: auto !important; /* Override any left positioning */
+                min-height: 280px; /* Adjusted for mobile */
+            }
+            
+            .banner-overlay h1 {
+                font-size: 2rem;
+            }
+            
+            .banner-overlay p {
+                font-size: 1rem;
+            }
+            
+            .section-heading {
+                font-size: 1.8rem;
+                padding: 0.5rem 1rem;
+            }
+        }
+        
+        /* Enhanced Request Info Form */
+        .request-info-form {
+            background: var(--gradient-modern);
+            padding: 2.5rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 40px rgba(37, 57, 0, 0.5);
+            max-width: 600px;
+            margin: 2rem auto;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(238, 238, 238, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .request-info-form::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" stroke="rgba(238,238,238,0.1)" stroke-width="1"/></svg>');
+            background-size: 20px 20px;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .request-info-form:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(37, 57, 0, 0.7);
+        }
+        
+        .request-info-form h2 {
+            color: var(--light-gray);
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .request-info-form input,
+        .request-info-form textarea {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1.25rem;
+            border: 2px solid rgba(238, 238, 238, 0.3);
+            border-radius: 0.75rem;
+            font-size: 1.1rem;
+            background-color: rgba(238, 238, 238, 0.9);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .request-info-form input:focus,
+        .request-info-form textarea:focus {
+            border-color: var(--primary-green);
+            box-shadow: 0 0 20px rgba(8, 203, 0, 0.5);
+            outline: none;
+        }
+        
+        .request-info-form button {
+            background: var(--gradient-accent);
+            color: var(--text-light);
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 2rem;
+            font-size: 1.25rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(8, 203, 0, 0.4);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .request-info-form button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(8, 203, 0, 0.6);
+        }
+        
+        /* Form clipart styling */
+        .form-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-clipart {
+            width: 50px;
+            height: 50px;
+            opacity: 0.8;
+            animation: float 3s ease-in-out infinite;
+            margin-right: 1rem;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+        
+        .section-container {
+            background: linear-gradient(135deg, rgba(238,238,238,0.9), rgba(238,238,238,0.9)); /* Light gray to light gray */
+            border-radius: 1rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(5px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" stroke="rgba(37,57,0,0.1)" stroke-width="1"/></svg>');
+            background-size: 20px 20px;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+        
+        /* Enhanced Online Courses Section */
+        .online-courses-section {
+            background: var(--gradient-modern);
+            color: var(--text-light);
+            padding: 4rem 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0rem;
+            box-shadow: 0 15px 35px rgba(37, 57, 0, 0.5);
+            position: relative;
+        }
+        
+        .online-courses-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" stroke="rgba(238,238,238,0.1)" stroke-width="1"/></svg>');
+            background-size: 20px 20px;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+        
+        .online-courses-section .section-heading {
+            font-size: 3rem;
+            padding: 1rem 2rem;
+            background: var(--gradient-accent);
+            color: var(--text-light);
+            box-shadow: 0 8px 25px rgba(8, 203, 0, 0.4);
+        }
+        
+        .online-courses-section .course-card {
+            background: rgba(238, 238, 238, 0.15);
+            border: 1px solid rgba(238, 238, 238, 0.3);
+            color: var(--text-light);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            backdrop-filter: blur(5px);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .online-courses-section .course-card::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 120px;
+            height: 120px;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">💻</text></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.1;
+            transform: rotate(15deg);
+        }
+        
+        .online-courses-section .course-card:hover {
+            background: rgba(238, 238, 238, 0.25);
+            border-color: var(--primary-green);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .online-courses-section .course-card h3 {
+            color: var(--primary-green);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .online-courses-section .course-card p {
+            color: rgba(238, 238, 238, 0.9);
+            margin-bottom: 1rem;
+            flex-grow: 1;
+            text-align: justify; /* Justified text */
+        }
+        
+        .online-courses-section .course-btn {
+            background: var(--gradient-accent);
+            color: var(--text-light);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-top: auto;
+            box-shadow: 0 6px 15px rgba(8, 203, 0, 0.4);
+        }
+        
+        .online-courses-section .course-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 25px rgba(8, 203, 0, 0.6);
+        }
+        
+        /* Enhanced Online Classes Section */
+        .online-classes-section {
+            background: var(--gradient-modern);
+            color: var(--text-light);
+            padding: 4rem 1.5rem;
+            margin: 2rem 0;
+            box-shadow: 0 15px 35px rgba(37, 57, 0, 0.5);
+            border-radius: 0rem;
+            position: relative;
+        }
+        
+        .online-classes-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" stroke="rgba(238,238,238,0.1)" stroke-width="1"/></svg>');
+            background-size: 20px 20px;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+        
+        .online-classes-section .section-heading {
+            font-size: 3.5rem;
+            padding: 1rem 2rem;
+            background: var(--gradient-accent);
+            color: var(--text-light);
+            box-shadow: 0 8px 25px rgba(8, 203, 0, 0.4);
+        }
+        
+        .online-classes-section .p-6 {
+            background: rgba(238, 238, 238, 0.15);
+            border: 1px solid rgba(238, 238, 238, 0.3);
+            backdrop-filter: blur(5px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .online-classes-section .p-6::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 120px;
+            height: 120px;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🎓</text></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.1;
+            transform: rotate(15deg);
+        }
+        
+        .online-classes-section .p-6:hover {
+            background: rgba(238, 238, 238, 0.25);
+            border-color: var(--primary-green);
+        }
+        
+        /* Enhanced Services Section */
+        .services-section {
+            background: linear-gradient(135deg, var(--light-gray), var(--light-gray)); /* Light gray to light gray gradient */
+            position: relative;
+        }
+        
+        .services-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" stroke="rgba(37,57,0,0.1)" stroke-width="1"/></svg>');
+            background-size: 20px 20px;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+        
+        .services-section .service-card {
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            background: linear-gradient(135deg, var(--light-gray), var(--light-gray)); /* Light gray to light gray */
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .services-section .service-card::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 120px;
+            height: 120px;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🛠️</text></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.1;
+            transform: rotate(15deg);
+        }
+        
+        .services-section .service-card:hover {
+            background: linear-gradient(135deg, var(--light-gray), var(--light-gray));
+            border-color: var(--primary-green);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .services-section .service-heading {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--dark-green);
+        }
+        
+        .services-section .service-btn {
+            background: var(--gradient-accent);
+            color: var(--text-light);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-top: 1rem;
+            box-shadow: 0 6px 15px rgba(8, 203, 0, 0.4);
+        }
+        
+        .services-section .service-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 25px rgba(8, 203, 0, 0.6);
+        }
+        
+        /* Enhanced Trainer section background */
+        .trainer-section {
+            background: var(--gradient-modern);
+            color: var(--text-light);
+            position: relative;
+        }
+        
+        .trainer-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" stroke="rgba(238,238,238,0.1)" stroke-width="1"/></svg>');
+            background-size: 20px 20px;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+        
+        .trainer-section .section-heading {
+            background: var(--gradient-accent);
+            color: var(--text-light);
+            box-shadow: 0 8px 25px rgba(8, 203, 0, 0.4);
+        }
+        
+        .trainer-section .trainer-card {
+            background: rgba(238, 238, 238, 0.15);
+            border: 1px solid rgba(238, 238, 238, 0.3);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .trainer-section .trainer-card::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 120px;
+            height: 120px;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">👨‍🏫</text></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.1;
+            transform: rotate(15deg);
+        }
+        
+        .trainer-section .trainer-card:hover {
+            background: rgba(238, 238, 238, 0.25);
+            border-color: var(--primary-green);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+        
+        .trainer-section .trainer-card h4 {
+            color: var(--primary-green);
+        }
+        
+        .trainer-section .trainer-card p {
+            color: var(--text-light);
+            text-align: justify; /* Justified text */
+        }
+        
+        .trainer-section .trainer-card img {
+            border: 3px solid var(--primary-green);
+            box-shadow: 0 8px 25px rgba(8, 203, 0, 0.4);
+        }
+        
+        /* Enhanced Contact section background */
+        .contact-section {
+            background: linear-gradient(135deg, var(--light-gray), var(--light-gray)); /* Light gray to light gray gradient */
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" stroke="rgba(37,57,0,0.1)" stroke-width="1"/></svg>');
+            background-size: 20px 20px;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+        
+        /* Adjust contact section text and icons for contrast */
+        .contact-section p,
+        .contact-section span,
+        .contact-section a {
+            color: var(--text-dark) !important;
+        }
+        
+        /* Enhance map iframe styling */
+        .contact-section .map-container {
+            border-radius: 1rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            border: 3px solid var(--primary-green);
+        }
+        
+        /* Enhanced Footer column separators */
+        .footer-column:not(:last-child) {
+            border-right: 1px solid rgba(238, 238, 238, 0.3);
+        }
+        
+        @media (max-width: 767px) {
+            .footer-column:not(:last-child) {
+                border-right: none;
+                border-bottom: 1px solid rgba(238, 238, 238, 0.3);
+                padding-bottom: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+        }
+        
+        /* Justify text for Edunology and Online Classes sections in footer */
+        .footer-column p {
+            text-align: justify;
+        }
+        
+        /* Enhanced colorful icon animations */
+        @keyframes colorChange {
+            0% { filter: hue-rotate(0deg); }
+            50% { filter: hue-rotate(180deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+        
+        .course-icon, .service-icon {
+            animation: colorChange 8s ease infinite;
+        }
+        
+        /* Enhanced card backgrounds */
+        .course-card:nth-child(1) {
+            background: linear-gradient(135deg, var(--light-gray), var(--primary-green));
+        }
+        
+        .course-card:nth-child(2) {
+            background: linear-gradient(135deg, var(--light-gray), var(--light-gray));
+        }
+        
+        .course-card:nth-child(3) {
+            background: linear-gradient(135deg, var(--dark-green), var(--primary-green));
+        }
+        
+        .course-card:nth-child(4) {
+            background: linear-gradient(135deg, var(--primary-green), var(--light-gray));
+        }
+        
+        .course-card:nth-child(5) {
+            background: linear-gradient(135deg, var(--light-gray), var(--primary-green));
+        }
+        
+        .course-card:nth-child(6) {
+            background: linear-gradient(135deg, var(--light-gray), var(--primary-green));
+        }
+        
+        .course-card:nth-child(7) {
+            background: linear-gradient(135deg, var(--light-gray), var(--dark-green));
+        }
+        
+        .course-card:nth-child(8) {
+            background: linear-gradient(135deg, var(--primary-green), var(--light-gray));
+        }
+        
+        .course-card:nth-child(9) {
+            background: linear-gradient(135deg, var(--primary-green), var(--light-gray));
+        }
+        
+        .course-card:nth-child(10) {
+            background: linear-gradient(135deg, var(--light-gray), var(--dark-green));
+        }
+        
+        .course-card:nth-child(11) {
+            background: linear-gradient(135deg, var(--light-gray), var(--primary-green));
+        }
+        
+        .course-card:nth-child(12) {
+            background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+        }
+        
+        .service-card:nth-child(1) {
+            background: linear-gradient(135deg, var(--light-gray), var(--primary-green));
+        }
+        
+        .service-card:nth-child(2) {
+            background: linear-gradient(135deg, var(--light-gray), var(--light-gray));
+        }
+        
+        .service-card:nth-child(3) {
+            background: linear-gradient(135deg, var(--dark-green), var(--primary-green));
+        }
+        
+        .service-card:nth-child(4) {
+            background: linear-gradient(135deg, var(--primary-green), var(--light-gray));
+        }
+        
+        .service-card:nth-child(5) {
+            background: linear-gradient(135deg, var(--light-gray), var(--primary-green));
+        }
+        
+        .service-card:nth-child(6) {
+            background: linear-gradient(135deg, var(--light-gray), var(--primary-green));
+        }
+        
+        /* Enhanced Why Choose section cards */
+        #why-choose .grid > div:nth-child(1) {
+            background: rgba(238, 238, 238, 0.15);
+            border-left: 4px solid var(--primary-green);
+            border-radius: 0; /* Removed rounded corners */
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #why-choose .grid > div:nth-child(1)::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 120px;
+            height: 120px;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">👨‍💼</text></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.1;
+            transform: rotate(15deg);
+        }
+        
+        #why-choose .grid > div:nth-child(2) {
+            background: rgba(238, 238, 238, 0.15);
+            border-left: 4px solid var(--primary-green);
+            border-radius: 0; /* Removed rounded corners */
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #why-choose .grid > div:nth-child(2)::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 120px;
+            height: 120px;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">💼</text></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.1;
+            transform: rotate(15deg);
+        }
+        
+        #why-choose .grid > div:nth-child(3) {
+            background: rgba(238, 238, 238, 0.15);
+            border-left: 4px solid var(--dark-green);
+            border-radius: 0; /* Removed rounded corners */
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #why-choose .grid > div:nth-child(3)::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 120px;
+            height: 120px;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">💻</text></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.1;
+            transform: rotate(15deg);
+        }
+        
+        #why-choose .grid > div:nth-child(4) {
+            background: rgba(238, 238, 238, 0.15);
+            border-left: 4px solid var(--light-gray);
+            border-radius: 0; /* Removed rounded corners */
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #why-choose .grid > div:nth-child(4)::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 120px;
+            height: 120px;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🔧</text></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.1;
+            transform: rotate(15deg);
+        }
+        
+        /* Enhanced Achievements section cards */
+        .section-gradient-bg .grid > div:nth-child(1) {
+            background: rgba(238, 238, 238, 0.15);
+            border-top: 4px solid var(--primary-green);
+            border-radius: 0; /* Removed rounded corners */
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-gradient-bg .grid > div:nth-child(1)::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 120px;
+            height: 120px;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">👥</text></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.1;
+            transform: rotate(15deg);
+        }
+        
+        .section-gradient-bg .grid > div:nth-child(2) {
+            background: rgba(238, 238, 238, 0.15);
+            border-top: 4px solid var(--primary-green);
+            border-radius: 0; /* Removed rounded corners */
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-gradient-bg .grid > div:nth-child(2)::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 120px;
+            height: 120px;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🏆</text></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.1;
+            transform: rotate(15deg);
+        }
+        
+        .section-gradient-bg .grid > div:nth-child(3) {
+            background: rgba(238, 238, 238, 0.15);
+            border-top: 4px solid var(--dark-green);
+            border-radius: 0; /* Removed rounded corners */
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-gradient-bg .grid > div:nth-child(3)::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 120px;
+            height: 120px;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">👨‍💻</text></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.1;
+            transform: rotate(15deg);
+        }
+        
+        .section-gradient-bg .grid > div:nth-child(4) {
+            background: rgba(238, 238, 238, 0.15);
+            border-top: 4px solid var(--light-gray);
+            border-radius: 0; /* Removed rounded corners */
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-gradient-bg .grid > div:nth-child(4)::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 120px;
+            height: 120px;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🤝</text></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.1;
+            transform: rotate(15deg);
+        }
+        
+        /* NEW: Dark text for Popular Courses section paragraphs */
+        #courses .course-card p {
+            color: var(--black) !important;
+        }
+        
+        /* Enhanced Online Courses Section - New styles */
+        .online-courses-highlight {
+            position: relative;
+            padding: 0.5rem 1rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        
+        .online-courses-highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary-green);
+            border-radius: 0px;
+        }
+        
+        .course-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--gradient-accent);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0rem;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+        
+        .course-duration {
+            display: flex;
+            align-items: center;
+            margin-top: 0.5rem;
+            color: rgba(238, 238, 238, 0.8);
+            font-size: 0.9rem;
+        }
+        
+        .course-duration i {
+            margin-right: 0.5rem;
+            color: var(--primary-green);
+        }
+        
+        /* Flip card animation for courses and services */
+        .flip-card-container {
+            perspective: 1000px;
+            width: 100%;
+            height: 400px;
+        }
+        
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+        
+        .flip-card-container:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 1rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 1.5rem;
+        }
+        
+        .flip-card-front {
+            background: linear-gradient(135deg, var(--light-gray), var(--light-gray));
+            color: var(--text-dark);
+        }
+        
+        .flip-card-back {
+            background: var(--gradient-bright); /* Dark green to bright green gradient */
+            color: #ffffff !important; /* White text for contrast */
+            transform: rotateY(180deg);
+            text-align: center;
+        }
+        
+        .flip-card-back h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            color: #ffffff !important; /* White text */
+        }
+        
+        .flip-card-back p {
+            margin-bottom: 1.5rem;
+            color: #ffffff !important; /* White text */
+            text-align: justify; /* Justified text */
+        }
+        
+        .flip-card-back .btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--text-light);
+            padding: 0.75rem 1.5rem;
+            border-radius: 2rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            display: inline-block;
+            margin-top: auto;
+        }
+        
+        .flip-card-back .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+        
+        /* Fix for course buttons to ensure they're visible */
+        .flip-card-front .course-btn-container {
+            margin-top: auto;
+            padding-top: 1rem;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .flip-card-front .course-btn {
+            background: var(--gradient-accent);
+            color: var(--text-light);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            display: inline-block;
+            box-shadow: 0 6px 15px rgba(8, 203, 0, 0.4);
+            z-index: 10;
+            position: relative;
+        }
+        
+        .flip-card-front .course-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 25px rgba(8, 203, 0, 0.6);
+        }
+        /* Ensure the image container is centered */
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        /* Adjust image styling */
+        img.enquiry-cartoon {
+            max-width: 200px; /* Adjust as needed */
+            width: 100%;
+            height: auto;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Why Choose Us section styles - UPDATED WITH GREEN GRADIENT */
+        .why-choose-card {
+            background: var(--gradient-primary) !important; /* Green gradient background */
+            color: white !important; /* White text for contrast */
+            border: none !important; /* Remove border */
+            box-shadow: 0 10px 25px rgba(37, 57, 0, 0.3) !important; /* Green shadow */
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .why-choose-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(37, 57, 0, 0.5) !important; /* Darker green shadow on hover */
+        }
+        
+        /* Icon containers in Why Choose Us cards */
+        .why-choose-card .w-16.h-16.rounded-full {
+            background: white !important; /* White background for icons */
+            color: var(--dark-green) !important; /* Dark green icons */
+        }
+        
+        .why-choose-card .w-10.h-10.rounded-full {
+            background: white !important; /* White background for checkmarks */
+            color: var(--dark-green) !important; /* Dark green checkmarks */
+        }
+        
+        /* Icon colors in Why Choose Us cards */
+        .why-choose-card .fas {
+            color: var(--dark-green) !important; /* Dark green for all icons */
+        }
+        
+        /* Text colors in Why Choose Us cards */
+        .why-choose-card h3,
+        .why-choose-card p,
+        .why-choose-card li {
+            color: white !important; /* Ensure all text is white */
+        }
+        
+        /* Hover effect for Why Choose Us cards */
+        .why-choose-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(37, 57, 0, 0.5) !important;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+            margin: 20px 0;
+        }
+        
+        .clipart-container {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+        }
+        
+        .clipart-item {
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .clipart-item:hover {
+            transform: scale(1.1);
+        }
+        
+        .clipart-icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            color: var(--primary-green);
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800">
+    <header class="fixed top-0 left-0 w-full z-50 nav-bg shadow-md">
+        <div class="max-w-7xl mx-auto flex justify-between items-center p-2">
+            <div class="text-2xl font-bold flex items-center">
+                <img src="image.png" alt="Edunology Logo" class="h-12 w-12 rounded-full shadow-lg mr-2"> Future Begins Here
+            </div>
+            <div class="md:flex space-x-4">
+                <a href="#contact" class="enquire-now-btn">
+                    <i class="fas fa-phone-alt"></i> Enquire Now
+                </a>
+            </div>
+            <div class="md:hidden">
+                <button id="menu-toggle"><i class="fas fa-bars text-2xl"></i></button>
+            </div>
+            <nav id="nav-menu" class="hidden md:flex items-center text-lg">
+                <a href="#home" class="nav-link px-4">Home</a>
+                <div class="h-6 w-px bg-gray-300 mx-2"></div>
+                <a href="#courses" class="nav-link px-4">Courses</a>
+                <div class="h-6 w-px bg-gray-300 mx-2"></div>
+                <a href="#services" class="nav-link px-4">Services</a>
+                <div class="h-6 w-px bg-gray-300 mx-2"></div>
+                <a href="#why-choose" class="nav-link px-4">Why Edunology?</a>
+                <div class="h-6 w-px bg-gray-300 mx-2"></div>
+                <a href="#online-classes" class="nav-link px-4">Online Classes</a>
+            </nav>
+        </div>
+        <div id="mobile-menu" class="hidden fixed top-12 w-full">
+            <ul class="flex flex-col items-center py-4">
+                <li class="w-full text-center py-2 border-b border-gray-300"><a href="#home" class="nav-link">Home</a></li>
+                <li class="w-full text-center py-2 border-b border-gray-300"><a href="#courses" class="nav-link">Courses</a></li>
+                <li class="w-full text-center py-2 border-b border-gray-300"><a href="#services" class="nav-link">Services</a></li>
+                <li class="w-full text-center py-2 border-b border-gray-300"><a href="#why-choose" class="nav-link">Why Edunology?</a></li>
+                <li class="w-full text-center py-2"><a href="#online-classes" class="nav-link">Online Classes</a></li>
+            </ul>
+        </div>
+    </header>
+    <section id="home" class="h-screen relative overflow-hidden animate-on-scroll">
+        <div class="swiper h-full">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide relative">
+                    <img src="slider1.png" class="w-full h-full object-cover" alt="Slide 1">
+                    <div class="banner-overlay text-white">
+                        <h1>सीखो और बढ़ो</h1>
+                        <p>घर बैठे आसान और आधुनिक ऑनलाइन क्लासेज</p>
+                        <p class="tagline">डिजिटल दुनिया में अपना भविष्य बनाएं!</p>
+                        <p class="mt-2">
+                            <a href="tel:+918881995995" class="banner-btn">
+                                <i class="fas fa-phone-alt mr-2"></i>कॉल करें
+                            </a>
+                        </p>
+                        <a href="#contact" class="banner-btn">अभी शुरू करें</a>
+                    </div>
+                </div>
+                <div class="swiper-slide relative">
+                    <img src="slider2.png" class="w-full h-full object-cover" alt="Slide 2">
+                    <div class="banner-overlay text-white">
+                        <h1>करियर को दो नया पंख</h1>
+                        <p>ऑनलाइन कंप्यूटर कोर्स सीखो, बढ़ो और आगे बढ़ो</p>
+                        <p class="tagline">नए कौशल से करियर को नई ऊंचाइयां दें!</p>
+                        <p class="mt-2">
+                            <a href="tel:+918881995995" class="banner-btn">
+                                <i class="fas fa-phone-alt mr-2"></i>कॉल करें
+                            </a>
+                        </p>
+                        <a href="#contact" class="banner-btn">सीखना शुरू करें</a>
+                    </div>
+                </div>
+                <div class="swiper-slide relative">
+                    <img src="slider3.png" class="w-full h-full object-cover" alt="Slide 3">
+                    <div class="banner-overlay text-white">
+                        <h1>डिजिटल बनो</h1>
+                        <p>हर स्किल, अब ऑनलाइन आपके साथ</p>
+                        <p class="tagline">डेटा की शक्ति से अपने भविष्य को आकार दें!</p>
+                        <p class="mt-2">
+                            <a href="tel:+918881995995" class="banner-btn">
+                                <i class="fas fa-phone-alt mr-2"></i>कॉल करें
+                            </a>
+                        </p>
+                        <a href="#contact" class="banner-btn">आज ही शुरू करें</a>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
+    
+    <!-- NEW Why Choose Us Section - Replacing About Us with White Background -->
+    <section id="why-choose" class="py-20 animate-on-scroll section-white-bg">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <h2 class="section-heading mx-auto mb-10">Why Choose Us?</h2>
+            
+            <!-- Clipart images with attractive heading -->
+            <div class="mb-12">
+                <div class="inline-block p-4 bg-green-100 rounded-full mb-6">
+                    <i class="fas fa-star text-yellow-500 text-4xl"></i>
+                </div>
+                <p class="text-xl text-gray-800 max-w-3xl mx-auto">
+                    Discover why thousands of students trust Edunology for their career transformation. 
+                    Our commitment to excellence and innovation sets us apart.
+                </p>
+            </div>
+            
+            <!-- Colorful charts and graphs -->
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="why-choose-card p-6">
+                    <h3 class="text-xl font-bold mb-4 text-white">Student Satisfaction Rate</h3>
+                    <div class="chart-container">
+                        <canvas id="satisfactionChart"></canvas>
+                    </div>
+                    <p class="text-white mt-4">
+                        <i class="fas fa-check-circle text-yellow-400 mr-2"></i>
+                        95% of our students report high satisfaction with our courses
+                    </p>
+                </div>
+                
+                <div class="why-choose-card p-6">
+                    <h3 class="text-xl font-bold mb-4 text-white">Placement Statistics</h3>
+                    <div class="chart-container">
+                        <canvas id="placementChart"></canvas>
+                    </div>
+                    <p class="text-white mt-4">
+                        <i class="fas fa-check-circle text-yellow-400 mr-2"></i>
+                        88% average placement rate across all our courses
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Detailed information cards -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="why-choose-card p-6 transform transition-all duration-500 hover:scale-105">
+                    <div class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-user-tie text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-white">Expert-Led Training</h3>
+                    <p class="text-white mb-4">
+                        Learn from industry professionals with years of experience. Our instructors provide hands-on, project-based training.
+                    </p>
+                    <div class="flex justify-center">
+                        <div class="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center">
+                            <i class="fas fa-check text-white"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="why-choose-card p-6 transform transition-all duration-500 hover:scale-105">
+                    <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-briefcase text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-white">Placement Support</h3>
+                    <p class="text-white mb-4">
+                        We offer dedicated placement assistance and have partnerships with top companies to help you start your career.
+                    </p>
+                    <div class="flex justify-center">
+                        <div class="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center">
+                            <i class="fas fa-check text-white"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="why-choose-card p-6 transform transition-all duration-500 hover:scale-105">
+                    <div class="w-16 h-16 rounded-full bg-purple-100 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-laptop-code text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-white">Flexible Learning</h3>
+                    <p class="text-white mb-4">
+                        Our online courses are designed for flexibility with live sessions and recorded lectures, so you can learn at your own pace.
+                    </p>
+                    <div class="flex justify-center">
+                        <div class="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center">
+                            <i class="fas fa-check text-white"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="why-choose-card p-6 transform transition-all duration-500 hover:scale-105">
+                    <div class="w-16 h-16 rounded-full bg-yellow-100 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-tools text-yellow-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-white">Practical Approach</h3>
+                    <p class="text-white mb-4">
+                        We focus on hands-on projects and real-world case studies to ensure you build a strong and impressive portfolio.
+                    </p>
+                    <div class="flex justify-center">
+                        <div class="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center">
+                            <i class="fas fa-check text-white"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Additional attractive elements -->
+            <div class="mt-16 bg-white border border-gray-200 shadow-lg rounded-2xl p-8 max-w-4xl mx-auto">
+                <h3 class="text-2xl font-bold mb-6 text-gray-800">Our Success Metrics</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-green-600 mb-2">6000+</div>
+                        <p class="text-gray-700">Happy Students</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-green-600 mb-2">4000+</div>
+                        <p class="text-gray-700">Placements</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-green-600 mb-2">2000+</div>
+                        <p class="text-gray-700">Internships</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-green-600 mb-2">50+</div>
+                        <p class="text-gray-700">Expert Trainers</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="py-20 section-gradient-bg text-white animate-on-scroll">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="section-heading mx-auto mb-12">Our Achievements at a Glance</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="p-6 rounded-xl shadow-lg border border-white border-opacity-20 transform transition-all duration-300 hover:scale-105">
+                    <i class="fas fa-users text-4xl icon-users mb-4"></i>
+                    <div class="text-6xl md:text-7xl font-extrabold counter" data-target="6000">+6000</div>
+                    <p class="text-xl md:text-2xl font-semibold mt-4">Satisfied Students</p>
+                </div>
+                <div class="p-6 rounded-xl shadow-lg border border-white border-opacity-20 transform transition-all duration-300 hover:scale-105">
+                    <i class="fas fa-award text-4xl icon-award mb-4"></i>
+                    <div class="text-6xl md:text-7xl font-extrabold counter" data-target="4000">+4000</div>
+                    <p class="text-xl md:text-2xl font-semibold mt-4">Placed Students</p>
+                </div>
+                <div class="p-6 rounded-xl shadow-lg border border-white border-opacity-20 transform transition-all duration-300 hover:scale-105">
+                    <i class="fas fa-laptop-code text-4xl icon-laptop-code mb-4"></i>
+                    <div class="text-6xl md:text-7xl font-extrabold counter" data-target="2000">+2000</div>
+                    <p class="text-xl md:text-2xl font-semibold mt-4">Internships Offered</p>
+                </div>
+                <div class="p-6 rounded-xl shadow-lg border border-white border-opacity-20 transform transition-all duration-300 hover:scale-105">
+                    <i class="fas fa-handshake text-4xl icon-handshake mb-4"></i>
+                    <div class="text-6xl md:text-7xl font-extrabold counter" data-target="2000">+2000</div>
+                    <p class="text-xl md:text-2xl font-semibold mt-4">Referral Students</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="placement-partners" class="py-20 placement-section animate-on-scroll section-white-bg">
+        <div class="max-w-6xl mx-auto px-6 section-container text-center">
+            <i class="fas fa-briefcase course-icon icon-briefcase"></i>
+            <h2 class="section-heading mx-auto mb-10"><font color="white">Our Placement Companies</font></h2>
+            <p class="text-lg mb-6">We partner with top companies to help our students launch rewarding careers.</p>
+            <div class="placement-grid">
+                <a href="https://google.com" target="_blank"><img src="google.png" alt="Google" class="placement-logo"></a>
+                <a href="https://accenture.com" target="_blank"><img src="Accenture.svg.webp" alt="Accenture" class="placement-logo"></a>
+                <a href="https://tcs.com" target="_blank"><img src="Tata_Consultancy_Services_old_logo.svg.png" alt="TCS" class="placement-logo"></a>
+                <a href="https://ibm.com" target="_blank"><img src="ibm.png" alt="IBM" class="placement-logo"></a>
+            </div>
+        </div>
+    </section>
+    <section id="online-classes" class="py-20 animate-on-scroll online-classes-section">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <div class="mb-6">
+                <span class="inline-block px-4 py-2 bg-yellow-400 text-purple-900 rounded-full text-sm font-bold uppercase tracking-wide mb-4">Premier Online Education</span>
+            </div>
+            <h2 class="section-heading mx-auto mb-6">Revolutionize Your Learning with Our Online Classes</h2>
+            <p class="text-xl mb-4 max-w-3xl mx-auto">Experience the future of education with our innovative online learning platform designed to transform your career from anywhere in the world.</p>
+            <div class="w-24 h-1 bg-yellow-400 mx-auto mb-12 rounded-full"></div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+                <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6 transform transition-all duration-300 hover:-translate-y-2 hover:bg-opacity-20">
+                    <div class="flex justify-center mb-4">
+                        <div class="w-16 h-16 rounded-full bg-yellow-400 flex items-center justify-center">
+                            <i class="fas fa-video text-purple-900 text-2xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Live Interactive Sessions</h3>
+                    <p>Engage with expert instructors in real-time, ask questions, and get instant feedback during our live online classes.</p>
+                </div>
+                
+                <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6 transform transition-all duration-300 hover:-translate-y-2 hover:bg-opacity-20">
+                    <div class="flex justify-center mb-4">
+                        <div class="w-16 h-16 rounded-full bg-yellow-400 flex items-center justify-center">
+                            <i class="fas fa-clock text-purple-900 text-2xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Learn At Your Pace</h3>
+                    <p>Access recorded lectures anytime, anywhere. Our flexible learning approach fits perfectly with your busy schedule.</p>
+                </div>
+                
+                <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6 transform transition-all duration-300 hover:-translate-y-2 hover:bg-opacity-20">
+                    <div class="flex justify-center mb-4">
+                        <div class="w-16 h-16 rounded-full bg-yellow-400 flex items-center justify-center">
+                            <i class="fas fa-laptop text-purple-900 text-2xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Hands-on Projects</h3>
+                    <p>Build real-world skills through practical projects that simulate actual industry challenges and create an impressive portfolio.</p>
+                </div>
+                
+                <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6 transform transition-all duration-300 hover:-translate-y-2 hover:bg-opacity-20">
+                    <div class="flex justify-center mb-4">
+                        <div class="w-16 h-16 rounded-full bg-yellow-400 flex items-center justify-center">
+                            <i class="fas fa-users text-purple-900 text-2xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Expert Support</h3>
+                    <p>Get personalized guidance from industry experts and connect with a vibrant community of learners throughout your journey.</p>
+                </div>
+            </div>
+            
+            <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-8 mb-12">
+                <h3 class="text-2xl font-bold mb-6">Our Online Learning Methodology</h3>
+                <div class="grid md:grid-cols-3 gap-8 text-left">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 w-12 h-12 rounded-full bg-yellow-400 flex items-center justify-center mr-4 mt-1">
+                            <span class="text-purple-900 font-bold">1</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">Concept Building</h4>
+                            <p>Master fundamental concepts through interactive video lessons and comprehensive reading materials designed by industry experts.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 w-12 h-12 rounded-full bg-yellow-400 flex items-center justify-center mr-4 mt-1">
+                            <span class="text-purple-900 font-bold">2</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">Practical Application</h4>
+                            <p>Apply your knowledge through hands-on exercises, coding challenges, and real-world case studies that reinforce learning.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 w-12 h-12 rounded-full bg-yellow-400 flex items-center justify-center mr-4 mt-1">
+                            <span class="text-purple-900 font-bold">3</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">Project Development</h4>
+                            <p>Build capstone projects that solve real problems, creating a portfolio that showcases your skills to potential employers.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 items-center text-left mb-12">
+                <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-8">
+                    <h3 class="text-2xl font-bold mb-4">Flexible Learning Schedule</h3>
+                    <p class="mb-4">Our online classes are designed to fit seamlessly into your busy life. Whether you're a working professional or a student, our flexible scheduling allows you to learn at your most productive hours.</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-yellow-400 mr-2"></i>
+                            <span>Weekend and weekday batch options</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-yellow-400 mr-2"></i>
+                            <span>Recorded sessions available 24/7</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-yellow-400 mr-2"></i>
+                            <span>Self-paced learning modules</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-8">
+                    <h3 class="text-2xl font-bold mb-4">Comprehensive Learning Resources</h3>
+                    <p class="mb-4">Access a wealth of learning materials that support your educational journey and enhance your understanding of complex topics.</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-yellow-400 mr-2"></i>
+                            <span>Downloadable resources and e-books</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-yellow-400 mr-2"></i>
+                            <span>Interactive quizzes and assignments</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-yellow-400 mr-2"></i>
+                            <span>Discussion forums for peer learning</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-8 mb-12">
+                <h3 class="text-2xl font-bold mb-6 text-center">Success Stories from Our Online Learners</h3>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="text-center">
+                        <div class="w-24 h-24 rounded-full bg-yellow-400 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-briefcase text-purple-900 text-3xl"></i>
+                        </div>
+                        <h4 class="font-bold text-lg mb-2">Career Transition</h4>
+                        <p>85% of our online learners successfully transitioned to new careers or got promoted within 6 months of course completion.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-24 h-24 rounded-full bg-yellow-400 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-chart-line text-purple-900 text-3xl"></i>
+                        </div>
+                        <h4 class="font-bold text-lg mb-2">Skill Enhancement</h4>
+                        <p>92% reported significant improvement in their technical skills and confidence in handling real-world projects.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-24 h-24 rounded-full bg-yellow-400 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-handshake text-purple-900 text-3xl"></i>
+                        </div>
+                        <h4 class="font-bold text-lg mb-2">Industry Connections</h4>
+                        <p>Our learners have been placed in over 200+ companies through our dedicated placement support network.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12">
+                <a href="#courses" class="banner-btn text-lg py-3 px-8">Explore Our Online Courses</a>
+            </div>
+        </div>
+    </section>
+    <section id="services" class="py-20 animate-on-scroll services-section section-white-bg">
+        <div class="max-w-6xl mx-auto px-6 section-container text-center">
+            <h2 class="section-heading mx-auto mb-10"><font color="white">Our Services</font></h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Flip Card 1 -->
+                <div class="flip-card-container">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <i class="fas fa-desktop service-icon icon-desktop"></i>
+                            <h3 class="service-heading text-xl font-semibold mb-2">Web Designing</h3>
+                            <p class="text-justify">Craft visually appealing, responsive websites using Figma and Adobe XD for seamless user experiences and brand-aligned designs.</p>
+                            <a href="#contact" class="service-btn"><font color="white">Get Started</font></a>
+                        </div>
+                        <div class="flip-card-back">
+                            <i class="fas fa-desktop service-icon icon-desktop"></i>
+                            <h3>Web Designing Details</h3>
+                            <p>Our web design service includes UI/UX design, responsive layouts, and brand identity creation. We use modern tools like Figma and Adobe XD to create stunning websites that engage users and drive conversions.</p>
+                            <a href="#contact" class="btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Flip Card 2 -->
+                <div class="flip-card-container">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <i class="fas fa-code service-icon icon-code"></i>
+                            <h3 class="service-heading text-xl font-semibold mb-2">Web Development</h3>
+                            <p class="text-justify">Develop scalable web applications with React, Node.js, and Django, ensuring high performance and robust functionality for businesses.</p>
+                            <a href="#contact" class="service-btn"><font color="white">Get Started</font></a>
+                        </div>
+                        <div class="flip-card-back">
+                            <i class="fas fa-code service-icon icon-code"></i>
+                            <h3>Web Development Details</h3>
+                            <p>Our web development service covers frontend and backend development using React, Node.js, Django, and more. We build scalable, secure, and high-performance web applications tailored to your business needs.</p>
+                            <a href="#contact" class="btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Flip Card 3 -->
+                <div class="flip-card-container">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <i class="fas fa-search-dollar service-icon icon-search-dollar"></i>
+                            <h3 class="service-heading text-xl font-semibold mb-2">Digital Marketing</h3>
+                            <p class="text-justify">Enhance online visibility with SEO, SEM, and social media strategies using Google Ads, Analytics, and Canva for engagement.</p>
+                            <a href="#contact" class="service-btn"><font color="white">Get Started</font></a>
+                        </div>
+                        <div class="flip-card-back">
+                            <i class="fas fa-search-dollar service-icon icon-search-dollar"></i>
+                            <h3>Digital Marketing Details</h3>
+                            <p>Our digital marketing service includes SEO optimization, social media marketing, content creation, and PPC campaigns. We use data-driven strategies to increase your online presence and drive targeted traffic.</p>
+                            <a href="#contact" class="btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Flip Card 4 -->
+                <div class="flip-card-container">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <i class="fas fa-paint-roller service-icon icon-paint-roller"></i>
+                            <h3 class="service-heading text-xl font-semibold mb-2">UI/UX Design</h3>
+                            <p class="text-justify">Create intuitive interfaces and engaging user experiences with wireframes and prototypes using Figma for web and mobile apps.</p>
+                            <a href="#contact" class="service-btn"><font color="white">Get Started</font></a>
+                        </div>
+                        <div class="flip-card-back">
+                            <i class="fas fa-paint-roller service-icon icon-paint-roller"></i>
+                            <h3>UI/UX Design Details</h3>
+                            <p>Our UI/UX design service focuses on creating intuitive and engaging user experiences. We conduct user research, create wireframes and prototypes, and design visually appealing interfaces for web and mobile applications.</p>
+                            <a href="#contact" class="btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Flip Card 5 -->
+                <div class="flip-card-container">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <i class="fas fa-search service-icon icon-search"></i>
+                            <h3 class="service-heading text-xl font-semibold mb-2">SEO Optimization</h3>
+                            <p class="text-justify">Boost search engine rankings with optimized content, keywords, and technical SEO to drive organic traffic and visibility.</p>
+                            <a href="#contact" class="service-btn"><font color="white">Get Started</font></a>
+                        </div>
+                        <div class="flip-card-back">
+                            <i class="fas fa-search service-icon icon-search"></i>
+                            <h3>SEO Optimization Details</h3>
+                            <p>Our SEO optimization service includes keyword research, on-page optimization, technical SEO, and link building. We help improve your website's visibility on search engines and drive organic traffic to your business.</p>
+                            <a href="#contact" class="btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Flip Card 6 -->
+                <div class="flip-card-container">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <i class="fas fa-mobile-alt service-icon icon-mobile-alt"></i>
+                            <h3 class="service-heading text-xl font-semibold mb-2">Mobile App Development</h3>
+                            <p class="text-justify">Build high-performance iOS and Android apps using React Native and Flutter for seamless UI and robust functionality.</p>
+                            <a href="#contact" class="service-btn"><font color="white">Get Started</font></a>
+                        </div>
+                        <div class="flip-card-back">
+                            <i class="fas fa-mobile-alt service-icon icon-mobile-alt"></i>
+                            <h3>Mobile App Development Details</h3>
+                            <p>Our mobile app development service covers iOS and Android platforms using React Native and Flutter. We create high-performance, user-friendly mobile applications with seamless UI and robust functionality.</p>
+                            <a href="#contact" class="btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<section id="enquiry-section" class="py-20 animate-on-scroll section-gradient-bg">
+    <div class="max-w-6xl mx-auto px-6">
+        <!-- Single box containing both sections with gap -->
+        <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-white border-opacity-20">
+            <div class="flex flex-col lg:flex-row gap-10 items-center">
+                <!-- Left side: Merged box with clipart, tagline and contact info -->
+                <div class="w-full lg:w-1/2 flex flex-col items-center">
+                    <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-2xl p-8 shadow-xl transform transition-all duration-500 hover:scale-105 w-full">
+                        <!-- Enhanced clipart -->
+                        <div class="flex justify-center w-full mb-6">
+                            <div class="relative">
+                                <!-- Main circle with gradient -->
+                                <div class="w-56 h-56 rounded-full bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 flex items-center justify-center shadow-xl">
+                                    <!-- Inner circle -->
+                                    <div class="w-48 h-48 rounded-full bg-white bg-opacity-20 backdrop-blur-sm flex items-center justify-center">
+                                        <!-- Main icon -->
+                                        <div class="relative">
+                                            <i class="fas fa-graduation-cap text-white text-6xl"></i>
+                                            <!-- Decorative elements -->
+                                            <div class="absolute -top-4 -left-4 text-yellow-300 animate-pulse">
+                                                <i class="fas fa-star text-2xl"></i>
+                                            </div>
+                                            <div class="absolute -bottom-4 -right-4 text-yellow-300 animate-pulse">
+                                                <i class="fas fa-star text-2xl"></i>
+                                            </div>
+                                            <div class="absolute top-0 -right-6 text-green-300 animate-bounce">
+                                                <i class="fas fa-book text-xl"></i>
+                                            </div>
+                                            <div class="absolute bottom-0 -left-6 text-green-300 animate-bounce">
+                                                <i class="fas fa-lightbulb text-xl"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Floating badge -->
+                                <div class="absolute -bottom-4 -right-4 bg-yellow-400 rounded-full p-3 shadow-lg animate-bounce">
+                                    <i class="fas fa-envelope text-purple-900 text-xl"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Tagline -->
+                        <div class="text-white text-center mb-6">
+                            <p class="text-xl font-bold mb-2">आपका भविष्य यहाँ शुरू होता है!</p>
+                            <p class="text-sm opacity-80">शिक्षा के लिए एक कदम आगे</p>
+                        </div>
+                        
+                        <!-- Contact information -->
+                        <div class="border-t border-white border-opacity-20 pt-6">
+                            <h3 class="text-xl font-bold text-white mb-4 text-center">Contact Information</h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fas fa-map-marker-alt text-yellow-400 mt-1 mr-3 text-lg"></i>
+                                    <span class="text-white">A-17, 3rd Floor, Laxmi Nagar Metro Station, Near Gate No 5, New Delhi, Delhi 110092</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-phone-alt text-yellow-400 mr-3 text-lg"></i>
+                                    <a href="tel:+918881995995" class="text-white hover:text-yellow-300 transition duration-300">+91 8881995995</a>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-envelope text-yellow-400 mr-3 text-lg"></i>
+                                    <a href="mailto:info@edunology.com" class="text-white hover:text-yellow-300 transition duration-300">info@edunology.com</a>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Question mark badge -->
+                        <div class="absolute -top-4 -right-4 bg-yellow-400 text-purple-900 rounded-full p-3 shadow-lg transform rotate-12 animate-bounce">
+                            <i class="fas fa-question text-2xl"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right side: Enquiry form -->
+                <div class="w-full lg:w-1/2">
+                    <div class="form-header mb-6">
+                        <div class="flex items-center justify-center mb-4">
+                            <div class="w-16 h-16 rounded-full bg-yellow-400 flex items-center justify-center mr-4">
+                                <i class="fas fa-comments text-purple-900 text-2xl"></i>
+                            </div>
+                            <h2 class="text-3xl font-bold text-white">Quick Enquiry</h2>
+                        </div>
+                        <p class="text-lg text-white text-center mb-4">Have questions? We're here to help!</p>
+                    </div>
+                    
+                    <form action="#" method="POST" class="space-y-4">
+                        <div class="relative">
+                            <input type="text" name="name" placeholder="Your Name" required 
+                                   class="w-full px-4 py-3 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent">
+                            <i class="fas fa-user absolute right-3 top-3.5 text-gray-300"></i>
+                        </div>
+                        
+                        <div class="relative">
+                            <input type="email" name="email" placeholder="Your Email" required 
+                                   class="w-full px-4 py-3 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent">
+                            <i class="fas fa-envelope absolute right-3 top-3.5 text-gray-300"></i>
+                        </div>
+                        
+                        <div class="relative">
+                            <input type="tel" name="phone" placeholder="Your Phone Number" required 
+                                   class="w-full px-4 py-3 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent">
+                            <i class="fas fa-phone-alt absolute right-3 top-3.5 text-gray-300"></i>
+                        </div>
+                        
+                        <div class="relative">
+                            <textarea name="message" rows="4" placeholder="Your Message" required 
+                                      class="w-full px-4 py-3 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent"></textarea>
+                            <i class="fas fa-comment-alt absolute right-3 top-3.5 text-gray-300"></i>
+                        </div>
+                        
+                        <button type="submit" 
+                                class="w-full py-3 px-6 bg-gradient-to-r from-yellow-400 to-yellow-500 text-purple-900 font-bold rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-opacity-50">
+                            <i class="fas fa-paper-plane mr-2"></i> Send Enquiry
+                        </button>
+                    </form>
+                    
+                    <div class="mt-6 text-center">
+                        <p class="text-white text-sm">Or contact us directly</p>
+                        <a href="tel:+918881995995" class="text-yellow-300 hover:text-yellow-400 font-medium flex items-center justify-center mt-2">
+                            <i class="fas fa-phone-alt mr-2"></i> +91 8881995995
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    <section id="courses" class="py-20 animate-on-scroll online-courses-section">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <div class="mb-6">
+                <span class="inline-block px-4 py-2 bg-yellow-400 text-purple-900 rounded-full text-sm font-bold uppercase tracking-wide mb-4">Most Popular</span>
+            </div>
+            <h2 class="section-heading mx-auto mb-6">Transform Your Career with Our Online Classes</h2>
+            <p class="text-xl mb-4 max-w-3xl mx-auto">Learn from industry experts through our interactive online courses designed for real-world success</p>
+            <div class="w-24 h-1 bg-yellow-400 mx-auto mb-12 rounded-full"></div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Flip Card 1 - Web Development -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <span class="course-badge">Bestseller</span>
+                            <div class="flex justify-between items-start mb-4">
+                                <i class="fas fa-globe course-icon icon-globe text-3xl"></i>
+                                <div class="flex items-center text-yellow-300">
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                </div>
+                            </div>
+                            <h3 class="course-heading text-xl font-semibold mb-2">Complete Web Development</h3>
+                            <p class="text-justify mb-4">Master HTML, CSS, JavaScript, and React to build responsive websites and e-commerce platforms with hands-on projects.</p>
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="course-duration">
+                                    <i class="fas fa-clock"></i>
+                                    <span>12 Weeks</span>
+                                </div>
+                                <div class="text-sm">
+                                    <i class="fas fa-users mr-1"></i>
+                                    <span>2,450+ Students</span>
+                                </div>
+                            </div>
+                            <div class="course-btn-container">
+                                <a href="#contact" class="course-btn">Enroll Now</a>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <i class="fas fa-globe course-icon icon-globe text-3xl"></i>
+                            <h3>Web Development Course</h3>
+                            <p>Comprehensive course covering HTML, CSS, JavaScript, and React. Build responsive websites and e-commerce platforms with hands-on projects.</p>
+                            <a href="#contact" class="btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Flip Card 2 - Python -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <span class="course-badge">Popular</span>
+                            <div class="flex justify-between items-start mb-4">
+                                <i class="fas fa-code course-icon icon-code text-3xl"></i>
+                                <div class="flex items-center text-yellow-300">
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star-half-alt text-sm"></i>
+                                </div>
+                            </div>
+                            <h3 class="course-heading text-xl font-semibold mb-2">Python Programming</h3>
+                            <p class="text-justify mb-4">Learn Python, Pandas, and Flask for automation, web scraping, and data analysis through practical, project-based learning.</p>
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="course-duration">
+                                    <i class="fas fa-clock"></i>
+                                    <span>10 Weeks</span>
+                                </div>
+                                <div class="text-sm">
+                                    <i class="fas fa-users mr-1"></i>
+                                    <span>1,890+ Students</span>
+                                </div>
+                            </div>
+                            <div class="course-btn-container">
+                                <a href="#contact" class="course-btn">Enroll Now</a>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <i class="fas fa-code course-icon icon-code text-3xl"></i>
+                            <h3>Python Programming</h3>
+                            <p>Master Python from basics to advanced concepts. Learn Pandas for data analysis, Flask for web development, and work on real-world projects.</p>
+                            <a href="#contact" class="btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Flip Card 3 - Excel -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="flex justify-between items-start mb-4">
+                                <i class="fas fa-table course-icon icon-table text-3xl"></i>
+                                <div class="flex items-center text-yellow-300">
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="far fa-star text-sm"></i>
+                                </div>
+                            </div>
+                            <h3 class="course-heading text-xl font-semibold mb-2">Excel & Data Analysis</h3>
+                            <p class="text-justify mb-4">Master Excel formulas, pivot tables, and data visualization to create insightful business dashboards for analytics.</p>
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="course-duration">
+                                    <i class="fas fa-clock"></i>
+                                    <span>8 Weeks</span>
+                                </div>
+                                <div class="text-sm">
+                                    <i class="fas fa-users mr-1"></i>
+                                    <span>1,650+ Students</span>
+                                </div>
+                            </div>
+                            <div class="course-btn-container">
+                                <a href="#contact" class="course-btn">Enroll Now</a>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <i class="fas fa-table course-icon icon-table text-3xl"></i>
+                            <h3>Excel & Data Analysis</h3>
+                            <p>Learn advanced Excel techniques including formulas, pivot tables, and data visualization. Create interactive dashboards for business analytics.</p>
+                            <a href="#contact" class="btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Flip Card 4 -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <span class="course-badge">Trending</span>
+                            <div class="flex justify-between items-start mb-4">
+                                <i class="fas fa-bullhorn course-icon icon-bullhorn text-3xl"></i>
+                                <div class="flex items-center text-yellow-300">
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star-half-alt text-sm"></i>
+                                </div>
+                            </div>
+                            <h3 class="course-heading text-xl font-semibold mb-2">Digital Marketing</h3>
+                            <p class="text-justify mb-4">Learn SEO, SEM, and social media marketing with Google Ads and Canva to drive campaigns and engagement.</p>
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="course-duration">
+                                    <i class="fas fa-clock"></i>
+                                    <span>6 Weeks</span>
+                                </div>
+                                <div class="text-sm">
+                                    <i class="fas fa-users mr-1"></i>
+                                    <span>1,320+ Students</span>
+                                </div>
+                            </div>
+                            <div class="course-btn-container">
+                                <a href="#contact" class="course-btn">Enroll Now</a>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <i class="fas fa-bullhorn course-icon icon-bullhorn text-3xl"></i>
+                            <h3>Digital Marketing</h3>
+                            <p>Master digital marketing strategies including SEO, SEM, social media, content marketing, and email campaigns. Use Google Ads and Analytics effectively.</p>
+                            <a href="#contact" class="btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Flip Card 5 -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="flex justify-between items-start mb-4">
+                                <i class="fas fa-chart-bar course-icon icon-chart-bar text-3xl"></i>
+                                <div class="flex items-center text-yellow-300">
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="far fa-star text-sm"></i>
+                                </div>
+                            </div>
+                            <h3 class="course-heading text-xl font-semibold mb-2">Data Analyst</h3>
+                            <p class="text-justify mb-4">Master SQL, Python, and Tableau to build dashboards and predictive models for data-driven business decisions.</p>
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="course-duration">
+                                    <i class="fas fa-clock"></i>
+                                    <span>14 Weeks</span>
+                                </div>
+                                <div class="text-sm">
+                                    <i class="fas fa-users mr-1"></i>
+                                    <span>980+ Students</span>
+                                </div>
+                            </div>
+                            <div class="course-btn-container">
+                                <a href="#contact" class="course-btn">Enroll Now</a>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <i class="fas fa-chart-bar course-icon icon-chart-bar text-3xl"></i>
+                            <h3>Data Analyst</h3>
+                            <p>Learn data analysis with SQL, Python, and Tableau. Master data cleaning, visualization, and statistical analysis for business decisions.</p>
+                            <a href="#contact" class="btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Flip Card 6 -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="flex justify-between items-start mb-4">
+                                <i class="fas fa-paint-brush course-icon icon-paint-brush text-3xl"></i>
+                                <div class="flex items-center text-yellow-300">
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="far fa-star text-sm"></i>
+                                </div>
+                            </div>
+                            <h3 class="course-heading text-xl font-semibold mb-2">Graphic Design</h3>
+                            <p class="text-justify mb-4">Learn Adobe Photoshop and Illustrator to create logos, posters, and UI designs through hands-on creative projects.</p>
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="course-duration">
+                                    <i class="fas fa-clock"></i>
+                                    <span>8 Weeks</span>
+                                </div>
+                                <div class="text-sm">
+                                    <i class="fas fa-users mr-1"></i>
+                                    <span>1,100+ Students</span>
+                                </div>
+                            </div>
+                            <div class="course-btn-container">
+                                <a href="#contact" class="course-btn">Enroll Now</a>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <i class="fas fa-paint-brush course-icon icon-paint-brush text-3xl"></i>
+                            <h3>Graphic Design</h3>
+                            <p>Master graphic design with Adobe Photoshop and Illustrator. Learn design principles, color theory, typography, and create logos, posters, and UI designs.</p>
+                            <a href="#contact" class="btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Flip Card 7 - Tally -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="flex justify-between items-start mb-4">
+                                <i class="fas fa-calculator course-icon icon-calculator text-3xl"></i>
+                                <div class="flex items-center text-yellow-300">
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="far fa-star text-sm"></i>
+                                </div>
+                            </div>
+                            <h3 class="course-heading text-xl font-semibold mb-2">Tally</h3>
+                            <p class="text-justify mb-4">Master Tally ERP 9 for GST, inventory management, and financial reporting through practical ledger and invoice exercises.</p>
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="course-duration">
+                                    <i class="fas fa-clock"></i>
+                                    <span>6 Weeks</span>
+                                </div>
+                                <div class="text-sm">
+                                    <i class="fas fa-users mr-1"></i>
+                                    <span>890+ Students</span>
+                                </div>
+                            </div>
+                            <div class="course-btn-container">
+                                <a href="#contact" class="course-btn">Enroll Now</a>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <i class="fas fa-calculator course-icon icon-calculator text-3xl"></i>
+                            <h3>Tally</h3>
+                            <p>Learn Tally ERP 9 for accounting, GST compliance, inventory management, and financial reporting through practical exercises.</p>
+                            <a href="#contact" class="btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Flip Card 8 -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="flex justify-between items-start mb-4">
+                                <i class="fas fa-chart-line course-icon icon-chart-line text-3xl"></i>
+                                <div class="flex items-center text-yellow-300">
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="far fa-star text-sm"></i>
+                                </div>
+                            </div>
+                            <h3 class="course-heading text-xl font-semibold mb-2">Power BI</h3>
+                            <p class="text-justify mb-4">Learn Power BI and DAX to create interactive dashboards and reports for effective business intelligence solutions.</p>
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="course-duration">
+                                    <i class="fas fa-clock"></i>
+                                    <span>8 Weeks</span>
+                                </div>
+                                <div class="text-sm">
+                                    <i class="fas fa-users mr-1"></i>
+                                    <span>760+ Students</span>
+                                </div>
+                            </div>
+                            <div class="course-btn-container">
+                                <a href="#contact" class="course-btn">Enroll Now</a>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <i class="fas fa-chart-line course-icon icon-chart-line text-3xl"></i>
+                            <h3>Power BI</h3>
+                            <p>Master Power BI for business intelligence and data visualization. Learn data modeling, DAX formulas, and create interactive dashboards.</p>
+                            <a href="#contact" class="btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- NEW: Flip Card 9 - VBA Macro -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="flex justify-between items-start mb-4">
+                                <i class="fas fa-file-code course-icon icon-cogs text-3xl"></i>
+                                <div class="flex items-center text-yellow-300">
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="far fa-star text-sm"></i>
+                                </div>
+                            </div>
+                            <h3 class="course-heading text-xl font-semibold mb-2">VBA Macro</h3>
+                            <p class="text-justify mb-4">Automate Excel tasks with VBA macros to streamline workflows and enhance productivity in business processes.</p>
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="course-duration">
+                                    <i class="fas fa-clock"></i>
+                                    <span>6 Weeks</span>
+                                </div>
+                                <div class="text-sm">
+                                    <i class="fas fa-users mr-1"></i>
+                                    <span>650+ Students</span>
+                                </div>
+                            </div>
+                            <div class="course-btn-container">
+                                <a href="#contact" class="course-btn">Enroll Now</a>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <i class="fas fa-file-code course-icon icon-cogs text-3xl"></i>
+                            <h3>VBA Macro</h3>
+                            <p>Learn VBA to automate Excel tasks. Master macro recording, writing VBA code, and creating user forms to boost efficiency.</p>
+                            <a href="#contact" class="btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- NEW: Flip Card 10 - Web Design -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="flex justify-between items-start mb-4">
+                                <i class="fas fa-palette course-icon icon-paint-brush text-3xl"></i>
+                                <div class="flex items-center text-yellow-300">
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star-half-alt text-sm"></i>
+                                </div>
+                            </div>
+                            <h3 class="course-heading text-xl font-semibold mb-2">Web Design</h3>
+                            <p class="text-justify mb-4">Master HTML, CSS, and responsive design principles to create visually appealing and user-friendly websites.</p>
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="course-duration">
+                                    <i class="fas fa-clock"></i>
+                                    <span>8 Weeks</span>
+                                </div>
+                                <div class="text-sm">
+                                    <i class="fas fa-users mr-1"></i>
+                                    <span>920+ Students</span>
+                                </div>
+                            </div>
+                            <div class="course-btn-container">
+                                <a href="#contact" class="course-btn">Enroll Now</a>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <i class="fas fa-palette course-icon icon-paint-brush text-3xl"></i>
+                            <h3>Web Design</h3>
+                            <p>Learn web design fundamentals including HTML, CSS, responsive design, and UX principles. Create professional websites for all devices.</p>
+                            <a href="#contact" class="btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- NEW: Flip Card 11 - Busy -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="flex justify-between items-start mb-4">
+                                <i class="fas fa-briefcase course-icon icon-briefcase text-3xl"></i>
+                                <div class="flex items-center text-yellow-300">
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="far fa-star text-sm"></i>
+                                </div>
+                            </div>
+                            <h3 class="course-heading text-xl font-semibold mb-2">Busy</h3>
+                            <p class="text-justify mb-4">Learn Busy accounting software for financial management, GST compliance, and business operations.</p>
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="course-duration">
+                                    <i class="fas fa-clock"></i>
+                                    <span>6 Weeks</span>
+                                </div>
+                                <div class="text-sm">
+                                    <i class="fas fa-users mr-1"></i>
+                                    <span>580+ Students</span>
+                                </div>
+                            </div>
+                            <div class="course-btn-container">
+                                <a href="#contact" class="course-btn">Enroll Now</a>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <i class="fas fa-briefcase course-icon icon-briefcase text-3xl"></i>
+                            <h3>Busy</h3>
+                            <p>Master Busy accounting software for financial management, GST compliance, inventory, and business operations.</p>
+                            <a href="#contact" class="btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- NEW: Flip Card 12 - GST -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <span class="course-badge">New</span>
+                            <div class="flex justify-between items-start mb-4">
+                                <i class="fas fa-file-invoice-dollar course-icon icon-file-invoice-dollar text-3xl"></i>
+                                <div class="flex items-center text-yellow-300">
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="far fa-star text-sm"></i>
+                                </div>
+                            </div>
+                            <h3 class="course-heading text-xl font-semibold mb-2">GST</h3>
+                            <p class="text-justify mb-4">Understand GST laws, filing procedures, and compliance requirements for businesses in India.</p>
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="course-duration">
+                                    <i class="fas fa-clock"></i>
+                                    <span>4 Weeks</span>
+                                </div>
+                                <div class="text-sm">
+                                    <i class="fas fa-users mr-1"></i>
+                                    <span>750+ Students</span>
+                                </div>
+                            </div>
+                            <div class="course-btn-container">
+                                <a href="#contact" class="course-btn">Enroll Now</a>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <i class="fas fa-file-invoice-dollar course-icon icon-file-invoice-dollar text-3xl"></i>
+                            <h3>GST</h3>
+                            <p>Learn GST fundamentals, registration, return filing, input tax credit, and compliance requirements for Indian businesses.</p>
+                            <a href="#contact" class="btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-16 bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-8 max-w-4xl mx-auto">
+                <h3 class="text-2xl font-bold mb-4">Why Choose Our Online Classes?</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+                    <div class="flex items-start">
+                        <i class="fas fa-chalkboard-teacher text-yellow-300 text-xl mr-3 mt-1"></i>
+                        <div>
+                            <h4 class="font-bold text-lg mb-1">Expert Instructors</h4>
+                            <p class="text-sm">Learn from industry professionals with real-world experience</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fas fa-certificate text-yellow-300 text-xl mr-3 mt-1"></i>
+                        <div>
+                            <h4 class="font-bold text-lg mb-1">Certification</h4>
+                            <p class="text-sm">Get industry-recognized certificates upon completion</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fas fa-infinity text-yellow-300 text-xl mr-3 mt-1"></i>
+                        <div>
+                            <h4 class="font-bold text-lg mb-1">Lifetime Access</h4>
+                            <p class="text-sm">Access course materials anytime, even after completion</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12">
+                <a href="#contact" class="banner-btn text-lg py-3 px-8">View All Courses</a>
+            </div>
+        </div>
+    </section>
+    <section id="testimonial" class="py-20 animate-on-scroll section-white-bg">
+        <div class="max-w-6xl mx-auto px-6 section-container text-center">
+            <h2 class="section-heading mx-auto mb-10"><font color="white">Students Testimonial</font></h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="testimonial-card p-6 shadow-md bg-white relative">
+                    <p class="text-gray-600 italic mb-4">"Edunology's Python course was a game-changer for my career. The instructors were excellent and the hands-on projects helped me build a strong portfolio. Highly recommend!"</p>
+                    <div class="flex items-center justify-center">
+                        <img src="32.jpg" alt="Student 1" class="w-16 h-16 rounded-full mr-4 border-2 border-yellow-500">
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800">Rahul Sharma</h4>
+                            <p class="text-sm text-gray-500">Python Student</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card p-6 shadow-md bg-white relative">
+                    <p class="text-gray-600 italic mb-4">"The web development course at Edunology is very practical. I learned to build responsive websites from scratch and the placement support was incredible. Got a great job thanks to them!"</p>
+                    <div class="flex items-center justify-center">
+                        <img src="44.jpg" alt="Student 2" class="w-16 h-16 rounded-full mr-4 border-2 border-yellow-500">
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800">Priya Singh</h4>
+                            <p class="text-sm text-gray-500">Web Development Student</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card p-6 shadow-md bg-white relative">
+                    <p class="text-gray-600 italic mb-4">"I took the Data Analysis course and it exceeded my expectations. The instructors made complex topics easy to understand, and the career guidance was top-notch."</p>
+                    <div class="flex items-center justify-center">
+                        <img src="45.jpg" alt="Student 3" class="w-16 h-16 rounded-full mr-4 border-2 border-yellow-500">
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800">Amit Kumar</h4>
+                            <p class="text-sm text-gray-500">Data Analyst Student</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="trainer" class="py-20 animate-on-scroll trainer-section">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <h2 class="section-heading mx-auto mb-10">Meet Our Expert Trainer</h2>
+            <div class="trainer-card p-6 shadow-md bg-white relative mx-auto">
+                <p class="text-gray-600 italic mb-4">Neeraj Kumar's teaching approach transformed how I understand Excel. His practical examples and real-world case studies made complex concepts simple and applicable to my job.</p>
+                <div class="flex items-center justify-center">
+                    <img src="nk.jpg" alt="Neeraj Kumar" class="w-16 h-16 rounded-full mr-4 border-2 border-yellow-500">
+                    <div>
+                        <h4 class="text-lg font-bold text-gray-800">Neeraj Kumar</h4>
+                        <p class="text-sm text-gray-500">Corporate Trainer, Microsoft Excel Specialist</p>
+                    </div>
+                </div>
+                <div class="mt-6 text-gray-700 text-justify">
+                    <font color=white>Neeraj Kumar is a seasoned corporate trainer with over 15 years of experience specializing in Microsoft Excel training. Certified as a Microsoft Office Specialist (MOS), Neeraj has trained over 500 professionals across top MNCs, helping them master advanced Excel techniques such as complex formulas, pivot tables, VBA macros, and data visualization. His hands-on teaching style emphasizes real-world projects, enabling students to create dynamic dashboards and automate business processes.
+             </font>   </div>
+            </div>
+        </div>
+    </section>
+    <section id="contact" class="py-20 animate-on-scroll contact-section">
+        <div class="max-w-6xl mx-auto px-6 section-container">
+            <h2 class="section-heading mx-auto mb-10 contact-heading">Get in Touch</h2>
+            <div class="grid md:grid-cols-2 gap-8 items-start">
+                <div>
+                    <p class="text-lg mb-4">Have questions? Fill out the form or contact us directly.</p>
+                    <ul class="space-y-4">
+                        <li>
+                            <i class="fas fa-map-marker-alt mr-2 course-icon icon-map-marker-alt"></i>
+                            <span>A-17, 3rd Floor, Laxmi Nagar Metro Station, Near Gate No 5, New Delhi, Delhi 110092</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone-alt mr-2 course-icon icon-phone-alt"></i>
+                            <a href="tel:+918881995995" class="hover:text-yellow-500 transition duration-300">+91 8881995995</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope mr-2 course-icon icon-envelope"></i>
+                            <a href="mailto:info@edunology.com" class="hover:text-yellow-500 transition duration-300">info@edunology.com</a>
+                        </li>
+                    </ul>
+                    <div class="w-full h-80 map-container mt-8">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.395143676742!2d77.2792773150827!3d28.641305982414697!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce3c400000001%3A0xe4a4b3b0c1c8a1f!2sLaxmi%20Nagar%2C%20New%20Delhi%2C%20Delhi%20110092!5e0!3m2!1sen!2sin!4v1698765432109!5m2!1sen!2sin"
+                            width="100%"
+                            height="100%"
+                            style="border:0;"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+                <div class="request-info-form">
+                    <div class="form-header">
+                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>" alt="Enquiry Form" class="form-clipart">
+                        <h2 class="text-2xl font-bold">Request Info</h2>
+                    </div>
+                    <form action="#" method="POST">
+                        <input type="text" name="name" placeholder="Your Name" required>
+                        <input type="email" name="email" placeholder="Your Email" required>
+                        <input type="tel" name="phone" placeholder="Your Phone Number" required>
+                        <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+                        <button type="submit">Send Request</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer-bg py-10 text-center animate-on-scroll">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-left">
+                <div class="footer-column pr-6 md:pr-10 border-r border-white">
+                    <h4 class="text-xl font-bold mb-4">Edunology</h4>
+                    <p class="text-sm">Edunology empowers learners with top-tier online education in tech fields like web development, Python, and data analysis. Our expert-led courses, hands-on projects, and flexible learning options help students and professionals achieve career success. Join us to upskill and thrive in today's dynamic digital world.</p>
+                </div>
+                <div class="footer-column">
+                    <h4 class="text-xl font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#about" class="hover:underline">About Us</a></li>
+                        <li><a href="#courses" class="hover:underline">Our Courses</a></li>
+                        <li><a href="#services" class="hover:underline">Services</a></li>
+                        <li><a href="#contact" class="hover:underline">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4 class="text-xl font-bold mb-4">Contact Info</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><i class="fas fa-map-marker-alt mr-2"></i> A-17, 3rd Floor, Laxmi Nagar Metro Station, Near Gate No 5, New Delhi, Delhi 110092</li>
+                        <li><i class="fas fa-phone-alt mr-2"></i> <a href="tel:+918881995995" class="hover:underline">+91 8881995995</a></li>
+                        <li><i class="fas fa-envelope mr-2"></i> <a href="mailto:info@edunology.com" class="hover:underline">info@edunology.com</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4 class="text-xl font-bold mb-4">Online Classes</h4>
+                    <p class="text-sm">Our online courses offer flexible learning with live sessions and recorded lectures. Master in-demand skills like Web Development, Python Programming, Excel & Data Analysis, Digital Marketing, and more. Learn from expert instructors, work on real-world projects, and access course materials anytime, anywhere to fit your schedule.</p>
+                </div>
+            </div>
+            <div class="mt-8 border-t border-white pt-4">
+                <p class="text-xs">© 2024 Edunology. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <a href="https://wa.me/918881995995" target="_blank" class="whatsapp-btn">
+        <i class="fab fa-whatsapp text-3xl"></i>
+    </a>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        // Swiper initialization
+        const swiper = new Swiper('.swiper', {
+            loop: true,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+        
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('active');
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+        
+        // Enhanced scroll animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        document.querySelectorAll('.animate-on-scroll').forEach(element => {
+            observer.observe(element);
+        });
+        
+        // Enhanced counter animation
+        const counters = document.querySelectorAll('.counter');
+        const counterObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = +counter.getAttribute('data-target');
+                    let count = 0;
+                    const speed = 200;
+                    const increment = target / speed;
+                    const updateCount = () => {
+                        if (count < target) {
+                            count += increment;
+                            counter.innerText = '+' + Math.ceil(count);
+                            requestAnimationFrame(updateCount);
+                        } else {
+                            counter.innerText = '+' + target;
+                        }
+                    };
+                    updateCount();
+                    observer.unobserve(counter);
+                }
+            });
+        }, {
+            threshold: 0.5
+        });
+        
+        counters.forEach(counter => {
+            counterObserver.observe(counter);
+        });
+        
+        // Activate map
+        document.addEventListener('DOMContentLoaded', function() {
+            const mapFrame = document.querySelector('.map-container iframe');
+            if (mapFrame) {
+                // Reload the iframe to ensure it loads properly
+                mapFrame.src = mapFrame.src;
+            }
+        });
+        
+        // Why Choose Us Charts
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if canvas elements exist
+            const satisfactionCanvas = document.getElementById('satisfactionChart');
+            const placementCanvas = document.getElementById('placementChart');
+            
+            if (!satisfactionCanvas || !placementCanvas) {
+                console.error('Canvas elements not found!');
+                return;
+            }
+            
+            // Student Satisfaction Rate Chart
+            try {
+                const satisfactionCtx = satisfactionCanvas.getContext('2d');
+                new Chart(satisfactionCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Extremely Satisfied', 'Satisfied', 'Average'],
+                        datasets: [{
+                            data: [75, 20, 5],
+                            backgroundColor: [
+                                '#FFD700', // Gold
+                                '#FFA500', // Orange
+                                '#FF6347'  // Tomato
+                            ],
+                            borderWidth: 0,
+                            hoverOffset: 20
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    color: '#333',
+                                    font: {
+                                        size: 14
+                                    },
+                                    padding: 20
+                                }
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                                titleFont: {
+                                    size: 16
+                                },
+                                bodyFont: {
+                                    size: 14
+                                },
+                                padding: 12
+                            }
+                        },
+                        animation: {
+                            animateRotate: true,
+                            animateScale: true
+                        }
+                    }
+                });
+            } catch (error) {
+                console.error('Error creating satisfaction chart:', error);
+            }
+            
+            // Placement Statistics Chart
+            try {
+                const placementCtx = placementCanvas.getContext('2d');
+                new Chart(placementCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Web Development', 'Python', 'Digital Marketing', 'Data Analytics'],
+                        datasets: [{
+                            label: 'Placement Rate (%)',
+                            data: [92, 88, 85, 90],
+                            backgroundColor: [
+                                '#4CAF50', // Green
+                                '#2196F3', // Blue
+                                '#9C27B0', // Purple
+                                '#FF9800'  // Orange
+                            ],
+                            borderColor: [
+                                '#388E3C',
+                                '#1976D2',
+                                '#7B1FA2',
+                                '#F57C00'
+                            ],
+                            borderWidth: 2,
+                            borderRadius: 8,
+                            hoverBackgroundColor: [
+                                '#66BB6A',
+                                '#42A5F5',
+                                '#AB47BC',
+                                '#FFA726'
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 100,
+                                ticks: {
+                                    color: '#333',
+                                    font: {
+                                        size: 12
+                                    },
+                                    callback: function(value) {
+                                        return value + '%';
+                                    }
+                                },
+                                grid: {
+                                    color: 'rgba(0, 0, 0, 0.1)'
+                                }
+                            },
+                            x: {
+                                ticks: {
+                                    color: '#333',
+                                    font: {
+                                        size: 12
+                                    }
+                                },
+                                grid: {
+                                    color: 'rgba(0, 0, 0, 0.1)'
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                labels: {
+                                    color: '#333'
+                                }
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                                titleFont: {
+                                    size: 16
+                                },
+                                bodyFont: {
+                                    size: 14
+                                },
+                                padding: 12,
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.dataset.label + ': ' + context.raw + '%';
+                                    }
+                                }
+                            }
+                        },
+                        animation: {
+                            duration: 2000,
+                            easing: 'easeOutBounce'
+                        }
+                    }
+                });
+            } catch (error) {
+                console.error('Error creating placement chart:', error);
+            }
+        });
+    </script>
+</body>
+</html>
